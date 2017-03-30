@@ -4,10 +4,10 @@
       <div class="documtent-outline" v-show="showDocumentOutline">
         
       </div>
-      <div class="editor" :style="{ width: showDocumentOutline ? 'calc(100% - 259px)' : '100%' }">
+      <div class="editor" 
+        :style="{ width: showDocumentOutline ? 'calc(100% - 259px)' : '100%' }"
+      >
         <div class="storyboard">
-          <al-page />
-          <al-page />
           <al-page />
         </div>
         <div class="utilities">
@@ -37,7 +37,7 @@
 
 <script>
 import TabbarButton from '../../common/TabbarButton'
-import AlPage from '../../objects/ALPage'
+import AlPage from '../../objects/AlPage'
 export default {
   name: 'editor-area',
   components: {

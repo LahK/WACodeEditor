@@ -7,9 +7,14 @@
 <script>
 export default {
   name: 'tabbar-button',
-  props: ['btnImg', 'btnImgFormat', 'isActive', 'onClick'],
+  props: ['btnImg', 'btnImgFormat', 'isActive', 'onClick', 'bindActive'],
   mounted () {
     this.active = this.isActive
+  },
+  beforeUpdate () {
+    if (this.bindActive !== undefined) {
+      this.active = this.bindActive
+    }
   },
   data () {
     return {
@@ -18,7 +23,9 @@ export default {
   },
   methods: {
     btnOnClick () {
-      this.active = !this.active
+      if (this.bindActive === undefined) {
+        this.active = !this.active
+      }
       this.$emit('click', this.active)
     }
   }

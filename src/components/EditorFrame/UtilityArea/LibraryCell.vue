@@ -1,6 +1,9 @@
 <template>
-  <div class="library-cell">
-    <img :src="img">
+  <div class="library-cell" 
+    @dragstart="onDragStart(name, $event)"
+    draggable
+  >
+    <img :src="img" draggable="false">
     <p>
       <span>{{ name }}</span> - {{ desc }}
     </p>
@@ -15,6 +18,11 @@ export default {
   },
   data () {
     return {
+    }
+  },
+  methods: {
+    onDragStart (name, e) {
+      e.dataTransfer.setData('text/plain', name)
     }
   }
 }

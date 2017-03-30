@@ -5,14 +5,31 @@
       <toolbar-button isLast="true" btnImg="./static/img/assistant-editor" btnImgFormat="svg"></toolbar-button>
     </div>
     <div class="btn-group pane-setting">
-      <toolbar-button isFirst="true" isActive="true" btnImg="./static/img/left-pane" btnImgFormat="svg" @click="toggleAreaButtonOnClick('nav')"></toolbar-button>
-      <toolbar-button btnImg="./static/img/bottom-pane" btnImgFormat="svg"></toolbar-button>
-      <toolbar-button isLast="true" isActive="true" btnImg="./static/img/right-pane" btnImgFormat="svg" @click="toggleAreaButtonOnClick('util')"></toolbar-button>
+      <toolbar-button 
+        isFirst="true" 
+        :bindActive="showNavigatorArea" 
+        btnImg="./static/img/left-pane" 
+        btnImgFormat="svg" 
+        @click="toggleArea('nav')"
+      />
+      <toolbar-button 
+        btnImg="./static/img/bottom-pane" 
+        btnImgFormat="svg"
+      />
+      <toolbar-button 
+        isLast="true" 
+        :bindActive="showUtilityArea" 
+        btnImg="./static/img/right-pane" 
+        btnImgFormat="svg" 
+        @click="toggleArea('util')"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import * as types from '../../../store/mutation-types'
 import ToolbarButton from './ToolbarButton'
 export default {
   name: 'toolbar',
@@ -21,12 +38,19 @@ export default {
   },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
     }
   },
+  computed: {
+    ...mapState({
+      showNavigatorArea: state => state.ew.showNavigatorArea,
+      showUtilityArea: state => state.ew.showUtilityArea
+    })
+  },
   methods: {
-    toggleAreaButtonOnClick (which) {
-      this.$emit('toggleArea', which)
+    toggleArea (which) {
+      this.$store.commit(types.TOGGLE_AREA_DISPLAY, {
+        which
+      })
     }
   }
 }

@@ -1,15 +1,16 @@
 <template>
   <div id="app">
-    <toolbar @toggleArea="toggleArea"></toolbar>
+    <toolbar></toolbar>
     <div class="areas">
       <navigator-area v-show="showNavigatorArea"></navigator-area>
-      <editor-area id="editor-area"></editor-area>
+      <editor-area id="editor-area" :style="{ width : `calc(100vw - ${showNavigatorArea ? '259px' : '0px'} - ${showUtilityArea ? '259px' : '0px'})`}"></editor-area>
       <utility-area v-show="showUtilityArea"></utility-area>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Toolbar from './components/EditorFrame/Toolbar/Toolbar'
 import NavigatorArea from './components/EditorFrame/NavigatorArea/NavigatorArea'
 import EditorArea from './components/EditorFrame/EditorArea/EditorArea'
@@ -23,24 +24,13 @@ export default {
     EditorArea,
     UtilityArea
   },
-  data () {
-    return {
-      showNavigatorArea: true,
-      showUtilityArea: true
-    }
+  computed: {
+    ...mapState({
+      showNavigatorArea: state => state.ew.showNavigatorArea,
+      showUtilityArea: state => state.ew.showUtilityArea
+    })
   },
   methods: {
-    toggleArea (which) {
-      switch (which) {
-        case 'nav':
-          this.showNavigatorArea = !this.showNavigatorArea
-          break
-        case 'util':
-          this.showUtilityArea = !this.showUtilityArea
-          break
-      }
-      document.getElementById('editor-area').style.width = `calc(100vw - ${this.showNavigatorArea ? '259px' : '0px'} - ${this.showUtilityArea ? '259px' : '0px'})`
-    }
   }
 }
 </script>
