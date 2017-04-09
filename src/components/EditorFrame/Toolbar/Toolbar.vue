@@ -1,5 +1,9 @@
 <template>
   <div class="toolbar">
+    <div class="menu">
+      <div>Import</div>
+      <div>Export</div>
+    </div>
     <div class="btn-group editor-setting">
       <toolbar-button isFirst="true" btnImg="./static/img/standard-editor" btnImgFormat="svg"></toolbar-button>
       <toolbar-button isLast="true" btnImg="./static/img/assistant-editor" btnImgFormat="svg"></toolbar-button>
@@ -58,6 +62,7 @@ export default {
 
 <style scoped>
 .toolbar {
+  z-index: 99;
   height: 38px;
   width: 100%;
 
@@ -101,5 +106,23 @@ export default {
 }
 .editor-setting {
   order: 8;
+}
+
+.menu {
+  position: absolute;
+  left: 10px;
+  display: flex;
+  flex-direction: row;
+  text-align: left
+}
+.menu div {
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: underline;
+  padding: 2px 5px;
+  cursor: pointer;
+}
+.menu div:hover {
+  color: rgba(44, 62, 80, 0.7);
 }
 </style>

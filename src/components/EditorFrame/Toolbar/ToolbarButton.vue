@@ -7,9 +7,14 @@
 <script>
 export default {
   name: 'toolbar-button',
-  props: ['btnImg', 'btnImgFormat', 'isActive', 'isFirst', 'isLast', 'isOnlyOne'],
+  props: ['btnImg', 'btnImgFormat', 'isActive', 'bindActive', 'isFirst', 'isLast', 'isOnlyOne'],
   mounted () {
     this.active = this.isActive
+  },
+  beforeUpdate () {
+    if (this.bindActive !== undefined) {
+      this.active = this.bindActive
+    }
   },
   data () {
     return {
@@ -18,7 +23,9 @@ export default {
   },
   methods: {
     btnOnClick () {
-      this.active = !this.active
+      if (this.bindActive === undefined) {
+        this.active = !this.active
+      }
       this.$emit('click')
     }
   }

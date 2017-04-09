@@ -24,6 +24,7 @@ export default {
 
 <style scoped>
 .navigator-area {
+  z-index: 99;
   width: 259px;
   height: calc(100vh - 38px);
 

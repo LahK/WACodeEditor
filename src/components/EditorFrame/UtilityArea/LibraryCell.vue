@@ -1,6 +1,7 @@
 <template>
   <div class="library-cell" 
     @dragstart="onDragStart(name, $event)"
+    @mouseup="onMouseUp($event)"
     draggable
   >
     <img :src="img" draggable="false">
@@ -22,7 +23,10 @@ export default {
   },
   methods: {
     onDragStart (name, e) {
-      e.dataTransfer.setData('text/plain', name)
+      e.dataTransfer.setData('text/plain', `Al${name}`)
+      var img = document.createElement('img')
+      img.src = `../../../../static/img/objects/AL-${name}.png`
+      e.dataTransfer.setDragImage(img, 0, 0)
     }
   }
 }

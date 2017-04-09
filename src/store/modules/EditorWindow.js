@@ -3,7 +3,10 @@ import * as types from '../mutation-types'
 // initial state
 const state = {
   showNavigatorArea: false,
-  showUtilityArea: false
+  showUtilityArea: true,
+  showSizeConstraintEditor: false,
+
+  isStoryboardDOMChanged: false
 }
 
 // getters
@@ -25,6 +28,13 @@ const mutations = {
         state.showUtilityArea = !state.showUtilityArea
         break
     }
+  },
+  [types.SET_IS_STORYBOARD_DOM_CHANGED] (state, newValue) {
+    state.isStoryboardDOMChanged = newValue
+  },
+  [types.SET_SIZE_CONSTRAINT_EDITOR] (state, newValue) {
+    console.log(newValue)
+    state.showSizeConstraintEditor = newValue
   }
 }
 

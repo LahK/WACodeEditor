@@ -3,7 +3,9 @@ import * as types from '../mutation-types'
 // initial state
 const state = {
   showObjectLibrary: true,
-  showMediaLibrary: false
+  showMediaLibrary: false,
+  showAttributeInspector: true,
+  showConstraintInspector: false
 }
 
 // getters
@@ -26,6 +28,18 @@ const mutations = {
       case 'media':
         state.showMediaLibrary = true
         state.showObjectLibrary = false
+        break
+    }
+  },
+  [types.SWITCH_UTILITY_AREA_INSPECTOR] (state, which) {
+    switch (which) {
+      case 'attr':
+        state.showAttributeInspector = true
+        state.showConstraintInspector = false
+        break
+      case 'c':
+        state.showAttributeInspector = false
+        state.showConstraintInspector = true
         break
     }
   }
