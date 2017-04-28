@@ -69,10 +69,7 @@ export default {
       mouseDownPosition: state => state.Events.mouseDownPosition,
       mouseDownObjectStatus: state => state.Events.mouseDownObjectStatus,
       onDragEvent: state => state.Events.onDragEvent
-    }),
-    uid () {
-      return this._uid
-    }
+    })
   },
   methods: {
     mouseDown (e) {
@@ -150,7 +147,7 @@ export default {
       this.isActive = false
       if (type !== null && type !== undefined && type !== 'AlPage') {
         this.$store.commit(MOUSE_UP_ON_LIB_CELL, e)
-        this.objectsKey.push(this.objId)
+        this.objectsKey.push(this._uid + this.objId)
         this.objects.push(type)
         this.objId += 1
       }

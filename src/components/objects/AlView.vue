@@ -106,6 +106,7 @@ export default {
       console.log(this.selectedObject)
       console.log(this._uid)
       console.log(this.selectedObject === this._uid)
+      if (e.key !== 'Delete' && e.key !== 'Backspace') { return }
       if (this.selectedObject === this._uid + '') {
         this.$emit('onDelete')
       }
