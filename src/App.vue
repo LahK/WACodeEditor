@@ -34,7 +34,9 @@ export default {
       selectedObjects: state => state.Events.selectedObjects,
       mouseDownPosition: state => state.Events.mouseDownPosition,
       selectedObjectsLastPosList: state => state.Events.selectedObjectsLastPosList,
-      selectedObjectVue: state => state.Events.selectedObjectVue
+      selectedObjectVue: state => state.Events.selectedObjectVue,
+      isFocus: state => state.Events.isFocus,
+      focusInputName: state => state.Events.focusInputName
     }),
     isMac () {
       return navigator.userAgent.indexOf('Mac OS X') !== -1
@@ -52,23 +54,31 @@ export default {
       switch (e.key) {
         // 左
         case 'ArrowLeft':
-          e.preventDefault()
-          if (_this.canMoveSelectedObject()) { _this.move('left') }
+          if (_this.canMoveSelectedObject()) {
+            e.preventDefault()
+            _this.move('left')
+          }
           break
           // 上
         case 'ArrowUp':
-          e.preventDefault()
-          if (_this.canMoveSelectedObject()) { _this.move('up') }
+          if (_this.canMoveSelectedObject()) {
+            e.preventDefault()
+            _this.move('up')
+          }
           break
           // 右
         case 'ArrowRight':
-          e.preventDefault()
-          if (_this.canMoveSelectedObject()) { _this.move('right') }
+          if (_this.canMoveSelectedObject()) {
+            e.preventDefault()
+            _this.move('right')
+          }
           break
           // 下
         case 'ArrowDown':
-          e.preventDefault()
-          if (_this.canMoveSelectedObject()) { _this.move('down') }
+          if (_this.canMoveSelectedObject()) {
+            e.preventDefault()
+            _this.move('down')
+          }
           break
         case 'Enter':
           // 当在编辑组件名称时，不允许换行。（只有单选模式可以编辑）
@@ -174,7 +184,10 @@ export default {
     canMoveSelectedObject () {
       // 1. 当不是在编辑组件名称，并且没有 focus 的时候
       // 2. 当处于 focus 状态，并且 focus 的输入框为 Left 或者 Top
-      return this.selectedObject !== null && ((!this.isFocus && !this.isEditingObjectName) || (this.isFocus && (this.focusInputName === 'Left' || this.focusInputName === 'Top')))
+      console.log('isFocus')
+      console.log(this.isFocus)
+      console.log(this.focusInputName)
+      return this.selectedObject !== null && ((!this.isFocus && !this.isEditingObjectName) || (this.isFocus && (this.focusInputName === 'left' || this.focusInputName === 'top')))
     }
   }
 }
